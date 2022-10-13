@@ -15,7 +15,7 @@ import pandas as pd
 def pregunta_01():
     """
     Carga de datos.
-    -------------------------------------------------------------------------------------
+    
     """
 
     # Lea el archivo `amazon_cells_labelled.tsv` y cree un DataFrame usando pandas.
