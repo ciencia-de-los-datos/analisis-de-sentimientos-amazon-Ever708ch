@@ -37,8 +37,8 @@ def pregunta_01():
     y_untagged = df_untagged["lbl"]
 
     # Retorne los grupos de mensajes
-    return x_tagged, y_tagged, x_untagged, y_untagged
-pregunta_01()
+    return x_tagged.shape, y_tagged.shape, x_untagged.shape, y_untagged.shape
+
 
 def pregunta_02():
     """
@@ -64,7 +64,7 @@ def pregunta_02():
 
     # Retorne `X_train`, `X_test`, `y_train` y `y_test`
     return x_train, x_test, y_train, y_test
-pregunta_02()
+
 
 def pregunta_03():
     """
