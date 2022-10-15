@@ -1,22 +1,13 @@
 """
 Análisis de Sentimientos usando Naive Bayes
 -----------------------------------------------------------------------------------------
-
 El archivo `amazon_cells_labelled.txt` contiene una serie de comentarios sobre productos
 de la tienda de amazon, los cuales están etiquetados como positivos (=1) o negativos (=0)
 o indterminados (=NULL). En este taller se construirá un modelo de clasificación usando
 Naive Bayes para determinar el sentimiento de un comentario.
-
 """
-from cmath import isnan
 import numpy as np
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.stem.porter import PorterStemmer
-from sklearn.model_selection import GridSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.naive_bayes import BernoulliNB
-from sklearn.metrics import confusion_matrix
 
 
 def pregunta_01():
@@ -47,6 +38,7 @@ def pregunta_01():
 
     # Retorne los grupos de mensajes
     return x_tagged, y_tagged, x_untagged, y_untagged
+
 
 def pregunta_02():
     """
@@ -81,19 +73,13 @@ def pregunta_03():
     """
     # Importe el stemmer de Porter
     # Importe CountVectorizer
-    from sklearn.feature_extraction.text import CountVectorizer
-    from nltk.stem.porter import PorterStemmer
+    from ____ import ____
 
     # Cree un stemeer que use el algoritmo de Porter.
-    stemmer = PorterStemmer()
-    vectorizer=CountVectorizer(
-        analyzer='word',
-        token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b", 
-        lowercase=True
-        )
+    stemmer = ____
 
     # Cree una instancia del analizador de palabras (build_analyzer)
-    analyzer = vectorizer.build_analyzer()
+    analyzer = ____().____()
 
     # Retorne el analizador de palabras
     return lambda x: (stemmer.stem(w) for w in analyzer(x))
@@ -109,13 +95,10 @@ def pregunta_04():
     # Importe GridSearchCV
     # Importe Pipeline
     # Importe BernoulliNB
-    from sklearn.feature_extraction.text import CountVectorizer
-    from sklearn.model_selection import GridSearchCV
-    from sklearn.pipeline import Pipeline
-    from sklearn.naive_bayes import BernoulliNB
+    from ____ import ____
 
     # Cargue las variables.
-    x_train, x_test, y_train, y_test = pregunta_02()
+    x_train, _, y_train, _ = pregunta_02()
 
     # Obtenga el analizador de la pregunta 3.
     analyzer = pregunta_03()
@@ -125,21 +108,21 @@ def pregunta_04():
     # límite superior para la frecuencia de palabras es del 100% y un límite
     # inferior de 5 palabras. Solo deben analizarse palabras conformadas por
     # letras.
-    countVectorizer = CountVectorizer(
-        analyzer=analyzer,
-        lowercase=True,
-        stop_words='english',
-        token_pattern=r"(?u)\b[a-zA-Z][a-zA-Z]+\b",
-        binary=True,
-        max_df=1.0,
-        min_df=5,
+    countVectorizer = ____(
+        analyzer=____,
+        lowercase=____,
+        stop_words=____,
+        token_pattern=____,
+        binary=____,
+        max_df=____,
+        min_df=____,
     )
 
     # Cree un pipeline que contenga el CountVectorizer y el modelo de BernoulliNB.
-    pipeline = Pipeline(
+    pipeline = ____(
         steps=[
-            ("countVectorizer",countVectorizer),
-            ("bernoulli", BernoulliNB()),
+            ("____", ____),
+            ("____", ____()),
         ],
     )
 
@@ -147,18 +130,18 @@ def pregunta_04():
     # considerar 10 valores entre 0.1 y 1.0 para el parámetro alpha de
     # BernoulliNB.
     param_grid = {
-        "bernoulli__alpha": np.arange(0.1, 1.01, 0.1),
+        "____": np.____(____, ____, ____),
     }
 
     # Defina una instancia de GridSearchCV con el pipeline y el diccionario de
     # parámetros. Use cv = 5, y "accuracy" como métrica de evaluación
-    gridSearchCV = GridSearchCV(
-        estimator=pipeline,
-        param_grid=param_grid,
-        cv=5,
-        scoring='accuracy',
-        refit=True,
-        return_train_score=True,
+    gridSearchCV = ____(
+        estimator=____,
+        param_grid=____,
+        cv=____,
+        scoring=____,
+        refit=____,
+        return_train_score=____,
     )
 
     # Búsque la mejor combinación de regresores
@@ -175,7 +158,7 @@ def pregunta_05():
     """
 
     # Importe confusion_matrix
-    from sklearn.metrics import confusion_matrix
+    from ____ import ____
 
     # Obtenga el pipeline de la pregunta 3.
     gridSearchCV = pregunta_04()
@@ -184,14 +167,14 @@ def pregunta_05():
     X_train, X_test, y_train, y_test = pregunta_02()
 
     # Evalúe el pipeline con los datos de entrenamiento usando la matriz de confusion.
-    cfm_train = confusion_matrix(
-        y_true=y_train,
-        y_pred=gridSearchCV.predict(X_train),
+    cfm_train = ____(
+        y_true=____,
+        y_pred=____.____(____),
     )
 
-    cfm_test = confusion_matrix(
-        y_true=y_test,
-        y_pred=gridSearchCV.predict(X_test),
+    cfm_test = ____(
+        y_true=____,
+        y_pred=____.____(____),
     )
 
     # Retorne la matriz de confusion de entrenamiento y prueba
@@ -208,11 +191,11 @@ def pregunta_06():
     gridSearchCV = pregunta_04()
 
     # Cargue los datos generados en la pregunta 01.
-    x_tagged, y_tagged, x_untagged, y_untagged = pregunta_01()
+    _, _, X_untagged, _ = pregunta_01()
 
     # pronostique la polaridad del sentimiento para los datos
     # no etiquetados
-    y_untagged_pred = gridSearchCV.predict(x_untagged)
+    y_untagged_pred = ____.____(____)
 
     # Retorne el vector de predicciones
     return y_untagged_pred
